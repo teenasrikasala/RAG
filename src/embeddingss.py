@@ -1,5 +1,5 @@
 from sentence_transformers import SentenceTransformer
-from chunker import chunks
+from src.chunker import chunks
 model=SentenceTransformer('all-MiniLM-L6-v2')
 texts=[]
 for chunk in chunks:

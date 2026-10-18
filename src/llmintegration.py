@@ -1,21 +1,22 @@
 import requests
-from faiss_search import retrieve
+from src.faiss_search import retrieve
 def ans_que(question):
     results=retrieve(question)
     if not results:
-        print("answer regarding to your question is not exist")
-        return
+        return f"I could not find relevant answer to your question"
     if results[0]["similarity_score"]<0.35:
-        print("I could not find relevant answer to your question")
-        return
+        print()
+        return f"I could not find relevant answer to your question"
     context="\n\n".join(f"page {item["page"]}:\n{item["text"]}" for item in results)
     prompt=f"""
            you are a question answer assisstance
            Rules to be followed
            1.only use the document to retrieve answers
            2.don't use information out of document
-           3.If the answer is missing then reply like this
-           "I could not find relevant answer to your question"
+           3. keep the answer clear and relevant to the question asked
+           4.don't end answer with broken sentence,complete the answer in full sentence
+           5.no need to mention the source ,page number or chunk id in the answer
+         
            DOCUMENT_CONTEXT:
            {context}
            QUESTION:
@@ -30,13 +31,9 @@ def ans_que(question):
                            },timeout=180)   
         response.raise_for_status()
         answer=response.json()["response"]
-        print(answer)
-        for item in results:
-            print(f"page:{item["page"]}") 
-            print(f"chunk:{item["chunk_id"]}")
-            print(f"similarity score:{item["similarity_score"]:.4f}")
+        return answer    
     except requests.exceptions.RequestException as error:
-        print("ollama is not responding:",error)    
+        return f"ollama is not responding: {error}"    
 if __name__=="__main__":
     while True:
         q=input("ask question or Q to quit:")

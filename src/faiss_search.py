@@ -1,7 +1,7 @@
 import numpy as np
 import faiss
 from sentence_transformers import SentenceTransformer
-from chunker import chunks
+from src.chunker import chunks
 model=SentenceTransformer('all-MiniLM-L6-v2')
 texts=[chunk['text'] for chunk in chunks]
 chunk_embeddings=model.encode(texts,normalize_embeddings=True)
@@ -19,7 +19,9 @@ def retrieve(q,k=3):
       for score,idx in zip(scores[0],indices[0]):
             chunk=chunks[int(idx)]
             results.append({
+          "source":chunk["source"],       
           "chunk_id":chunk["chunk_id"],
+          "source":chunk["source"],       
           "page":chunk["page"],
           "similarity_score":round(float(score),4),
           "text":chunk["text"]
@@ -32,9 +34,4 @@ if __name__=="__main__":
           if q.lower()=="q":
                break
           result=retrieve(q)
-          for rank,chunk in enumerate(result,start=1):      
-              print(f"Rank:{rank}")
-              print("chunk_id:",chunk['chunk_id'])
-              print("page:",chunk['page'])
-              print("similarity score:",chunk['similarity_score'])
-              print("text:",chunk['text'])
+         

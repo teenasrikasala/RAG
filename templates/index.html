@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Guide | College Rules Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" data-page="chat" aria-label="Campus Guide home">
+        <span class="brand-mark" aria-hidden="true">✳</span>
+        <span class="brand-name">Campus<br>Guide</span>
+      </a>
+      <p class="brand-caption">Your college rules,<br>one chat away.</p>
+
+      <div class="sidebar-divider"></div>
+
+      <nav class="navigation" aria-label="Main navigation">
+        <button class="nav-link active" type="button" data-page="chat"><span class="nav-icon">⌂</span> Chat</button>
+        <button class="nav-link" type="button" data-page="about"><span class="nav-icon">▤</span> About</button>
+        <button class="nav-link" type="button" data-page="help"><span class="nav-icon">ⓘ</span> Help</button>
+      </nav>
+
+      <section class="tip-card">
+        <h2><span aria-hidden="true">✦</span> Tip</h2>
+        <p>Be specific with your questions for more helpful answers.</p>
+      </section>
+
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        <span>Powered by RAG + Llama 3</span>
+        <small>Accurate · Reliable · Helpful</small>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <h1><span class="title-mark" aria-hidden="true">✣</span> College Rules Assistant</h1>
+          <p>Ask me anything about Attendance, Examinations, Hostel, Leave or Student Conduct.</p>
+        </div>
+        <div class="online-pill"><span class="status-dot"></span> Online</div>
+      </header>
+
+      <section class="page-view chat-view" id="chatPage">
+        <div class="conversation" id="conversation" aria-live="polite">
+          <article class="message-row assistant-row">
+            <div class="avatar assistant-avatar" aria-hidden="true">✳</div>
+            <div class="message assistant-message welcome-card">
+              <p class="welcome-title">Hi! I'm your College Rules Assistant ✦</p>
+              <p class="welcome-copy">I can help you with information from:</p>
+              <div class="topic-list" aria-label="Suggested topics">
+                <button class="topic-btn attendance" type="button" data-question="What are the attendance requirements?"><span aria-hidden="true">▦</span> Attendance</button>
+                <button class="topic-btn examinations" type="button" data-question="What are the examination rules?"><span aria-hidden="true">▤</span> Examinations</button>
+                <button class="topic-btn hostel" type="button" data-question="What are the hostel rules?"><span aria-hidden="true">⌂</span> Hostel</button>
+                <button class="topic-btn leave" type="button" data-question="How should students apply for leave?"><span aria-hidden="true">➤</span> Leave</button>
+                <button class="topic-btn conduct" type="button" data-question="What does the student code of conduct say?"><span aria-hidden="true">◆</span> Conduct</button>
+              </div>
+              <p class="welcome-note">Choose a topic or type your question below. I'll look for the answer.</p>
+            </div>
+          </article>
+        </div>
+
+        <form class="composer" id="chatForm">
+          <label class="sr-only" for="questionInput">Your question</label>
+          <textarea id="questionInput" name="question" rows="1" placeholder="Ask your question..." autocomplete="off" aria-label="Your question"></textarea>
+          <button class="send-button" id="sendButton" type="submit" aria-label="Send question"><span aria-hidden="true">➤</span></button>
+        </form>
+        <p class="input-note">Ask one clear question at a time.</p>
+      </section>
+
+      <section class="page-view info-view" id="aboutPage" hidden>
+        <div class="info-card">
+          <div class="info-symbol" aria-hidden="true">✣</div>
+          <h2>About Campus Guide</h2>
+          <p>Campus Guide helps students find information about attendance, examinations, hostel rules, leave policies and student conduct.</p>
+          <p>It uses Retrieval-Augmented Generation (RAG) to retrieve relevant text from college documents and generate an answer using Llama 3.</p>
+          <p>Answers depend on the available documents. Please verify important decisions with your college office.</p>
+          <button class="secondary-button" type="button" data-page="chat">Back to Chat</button>
+        </div>
+      </section>
+
+      <section class="page-view info-view" id="helpPage" hidden>
+        <div class="info-card">
+          <div class="info-symbol" aria-hidden="true">ⓘ</div>
+          <h2>How to use Campus Guide</h2>
+          <ol class="help-list">
+            <li><span>01</span> Choose a suggested topic or type a question.</li>
+            <li><span>02</span> Ask one clear question at a time.</li>
+            <li><span>03</span> If information is unavailable, the assistant should say so.</li>
+          </ol>
+          <p class="notice">AI answers can be incomplete or incorrect. Confirm important policy decisions with your college administration.</p>
+          <button class="secondary-button" type="button" data-page="chat">Back to Chat</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</body>
+</html>
