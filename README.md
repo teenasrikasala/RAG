@@ -58,28 +58,21 @@ RAG/
 
 ### 1. Clone the repository
 
-```bash
 git clone https://github.com/teenasrikasala/RAG.git
 cd RAG
-```
 
 ### 2. Create a virtual environment
 
-```bash
 python -m venv venv
-```
 
 Activate it in Windows PowerShell:
 
-```powershell
+powershell
 .\venv\Scripts\Activate.ps1
-```
 
 ### 3. Install the required packages
 
-```bash
 pip install -r requirements.txt
-```
 
 ### 4. Install and run Ollama
 
@@ -87,17 +80,13 @@ Download Ollama from https://ollama.com/download.
 
 Download the Llama 3 model:
 
-```bash
 ollama pull llama3
-```
 
 Make sure Ollama is running on your computer.
 
 ### 5. Start the application
 
-```bash
 python app.py
-```
 
 Open `http://127.0.0.1:5000` in your browser.
 
@@ -116,7 +105,3 @@ The project runs locally using Flask and Ollama. It uses the policy PDFs as its 
 ## Author
 
 **Teenasri Kasala**
-
-GitHub: https://github.com/teenasrikasala
-
-LinkedIn: https://www.linkedin.com/in/teena-sri-kasala-62973532b/
